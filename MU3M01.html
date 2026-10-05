@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>M01 · Small stories, big ideas</title>
+<style>
+:root{color-scheme:light dark;--bg:#f5f4ef;--paper:#fffefa;--ink:#202e37;--muted:#53636b;--line:#d8dfdf;--soft:#eaf1f2;--blue:#2466b2;--red:#ba4439;--green:#147655;--purple:#8051ac;--orange:#ab5d12;--grid:#dfe5e5;--story:#f7efdc;--focus:#925708}
+@media(prefers-color-scheme:dark){:root{--bg:#142026;--paper:#1c2b33;--ink:#eef4f5;--muted:#bbccd2;--line:#40535d;--soft:#263c46;--blue:#82baff;--red:#ff9a90;--green:#73dbb1;--purple:#c7a4f3;--orange:#ffd08b;--grid:#354952;--story:#353326;--focus:#ffd08b}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:920px;margin:auto;padding:48px 24px 64px}a{color:var(--blue);text-underline-offset:3px}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(30px,5vw,48px);line-height:1.13;letter-spacing:-1.5px;margin-bottom:18px;max-width:680px}h2{font-size:25px;line-height:1.25;margin-bottom:16px}h3{font-size:19px;margin:22px 0 10px}.eyebrow{font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:1.6px;color:var(--muted);margin:0 0 12px}.intro{max-width:730px}.intro p{margin-bottom:14px}.small{font-size:14px;color:var(--muted)}nav{background:var(--paper);padding:22px 24px;border:1px solid var(--line);border-radius:14px;margin:26px 0 34px}nav ol{display:grid;grid-template-columns:1fr 1fr;gap:7px 30px;margin:10px 0 0;padding-left:23px;font-size:15px}nav a{text-decoration:none}nav a:hover{text-decoration:underline}.part{margin:38px 0 16px;font-size:13px;text-transform:uppercase;letter-spacing:1.3px;font-weight:750;color:var(--muted)}section.lesson{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:24px;scroll-margin-top:22px}.section-top{display:flex;gap:14px;align-items:baseline}.num{font-size:14px;font-weight:700;color:var(--muted)}.story{padding:16px 19px;border-left:3px solid var(--orange);background:var(--story);border-radius:0 8px 8px 0;margin-bottom:16px}.story p{margin:0}.mapping{font-size:15px;margin-bottom:18px}.mapping strong{font-weight:700}.controls{display:flex;gap:12px 18px;align-items:center;flex-wrap:wrap;padding:15px 0 9px}.slider-label{display:flex;align-items:center;flex-wrap:wrap;gap:9px;font-size:15px;font-weight:600}input[type=range]{width:180px;accent-color:var(--blue);cursor:pointer}button{font:600 14px/1.3 Inter,system-ui,sans-serif;background:var(--soft);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:10px 14px;cursor:pointer;min-height:42px}button:hover{border-color:var(--muted)}button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}button:disabled{opacity:.5;cursor:wait}button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:4px}.button-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 15px}.plot{overflow-x:auto;margin:4px 0 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}svg{display:block;width:100%;min-width:550px;height:auto}svg text{fill:var(--ink);font:16px Inter,system-ui,sans-serif}svg .tick{font-size:14px;fill:var(--muted)}svg .axis-label{font-size:15px;fill:var(--muted)}svg .grid{stroke:var(--grid);stroke-width:1}svg .axis{stroke:var(--muted);stroke-width:1.5}svg .blue{stroke:var(--blue)}svg .red{stroke:var(--red)}svg .green{stroke:var(--green)}svg .purple{stroke:var(--purple)}svg .orange{stroke:var(--orange)}svg .curve{fill:none;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}svg .guide{fill:none;stroke:var(--muted);stroke-width:1.4;stroke-dasharray:5 5}svg .tangent{stroke-width:2.5;stroke-dasharray:8 5;fill:none}.legend{display:flex;gap:10px 23px;flex-wrap:wrap;font-size:14px;margin:10px 0}.legend span:before{content:"";display:inline-block;width:23px;height:3px;vertical-align:middle;background:var(--blue);margin-right:8px}.legend .lg-red:before{background:var(--red)}.legend .lg-green:before{background:var(--green)}.legend .lg-purple:before{background:var(--purple)}.legend .lg-orange:before{background:var(--orange)}.readout{min-height:56px;border-radius:8px;padding:12px 15px;background:var(--soft);font-size:15px;font-variant-numeric:tabular-nums;margin-bottom:14px}.math{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:19px;line-height:1.8}.formula{padding:10px 0;overflow-wrap:anywhere}.question{font-weight:650;margin:16px 0 8px;font-size:16px}details{border-top:1px solid var(--line);padding-top:9px;margin-top:8px;font-size:15px}summary{cursor:pointer;font-weight:600;min-height:36px}details p{margin:5px 0 8px}.boundary{font-size:14px;color:var(--muted);margin:12px 0 0}.steps{padding-left:24px}.steps li{padding:6px 0}.steps p{margin:5px 0}.math-table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0}.math-table td,.math-table th{text-align:left;border-bottom:1px solid var(--line);padding:10px}.math-table th{background:var(--soft)}footer{font-size:14px;color:var(--muted);padding:12px 4px}.mobile-note{display:none}label.motion{font-size:14px;display:flex;gap:9px;align-items:center}input[type=checkbox]{accent-color:var(--blue);width:17px;height:17px}sup{font-size:.75em}noscript{display:block;background:var(--story);padding:18px}.footer-check{padding:18px;background:var(--soft);border-radius:10px}
+@media(max-width:600px){main{padding:28px 14px}section.lesson{padding:20px 16px}nav{padding:18px}nav ol{grid-template-columns:1fr}h2{font-size:22px}.mobile-note{display:block;font-size:12px;color:var(--muted)}input[type=range]{width:160px}.story{padding:13px 15px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@media print{body{background:white;color:black}main{padding:0;max-width:none}nav,.controls,.button-row,.motion,.mobile-note{display:none!important}.lesson{break-inside:avoid;border-color:#bbb}svg{min-width:0}details{display:block}.story,.readout{background:#eee}a{color:inherit}}
+</style>
+</head>
+<body>
+<main>
+<header class="intro">
+<p class="eyebrow">Mathematical Methods · M01 + its foundations</p>
+<h1>Small stories.<br>See what changes.</h1>
+<p>Start with the foundations, then discover why <span class="math">e</span> is special. Read a tiny story, predict what will happen, and try the picture.</p>
+<p class="small">Use one or two sections at a time. These pictures support your M01 lesson; the worked examples and practice still matter. A picture can illustrate a rule or a limit without proving it.</p>
+<label class="motion"><input type="checkbox" id="reduce-motion"> Skip animation; show changes immediately</label>
+</header>
+<nav aria-label="Learning order"><strong>Your route</strong><ol>
+<li><a href="#s1">A function connects input and output</a></li><li><a href="#s2">Adding or multiplying?</a></li><li><a href="#s3">Rewind: zero and negative powers</a></li><li><a href="#s4">A point and a slope make a line</a></li><li><a href="#s5">An amount is different from a rate</a></li><li><a href="#s6">From two points to one local slope</a></li><li><a href="#s7">Choose the base: find e</a></li><li><a href="#s8">For eˣ, height and slope match</a></li><li><a href="#s9">Lift the curve or stretch it</a></li><li><a href="#s10">Connect the pictures to the algebra</a></li>
+</ol></nav>
+<noscript>The stories and explanations can be read without JavaScript. Enable JavaScript in your browser to use the diagrams and controls.</noscript>
+<p class="part">Part A · Foundations for M01</p>
+<section class="lesson" id="s1">
+<div class="section-top"><span class="num">01</span><h2>A function connects input and output</h2></div>
+<div class="story"><p>Imagine a number machine. Whatever number you put in, it doubles it and adds one. The answer changes when the input changes, but the machine keeps following the same rule.</p></div>
+<p class="mapping"><strong>Connect it:</strong> input = <span class="math">x</span>; rule = <span class="math">f(x) = 2x + 1</span>; output = <span class="math">y</span>. One input and its output give one graph point, <span class="math">(x, y)</span>.</p>
+<div class="controls"><label class="slider-label" for="input-x">Input x <input id="input-x" type="range" min="-2" max="3" step="0.25" value="1"></label></div>
+<div class="button-row"><button class="primary" data-action="input-run">Try another input</button><button data-action="reset" data-section="1">Reset</button></div>
+<div class="plot"><svg id="svg1" viewBox="0 0 720 440" role="img" aria-labelledby="title1 desc1"><title id="title1">An input passes through the rule and becomes a plotted point</title><desc id="desc1">The blue graph is y equals two x plus one. The marked point corresponds to the selected input.</desc></svg></div>
+<p class="mobile-note">On a small screen, swipe the diagram sideways.</p><div class="readout" id="read1" aria-live="polite"></div>
+<p class="question">Predict: if the input rises by one, how much does the output rise?</p><details><summary>Check your idea</summary><p>It rises by two. Doubling the extra input adds two to the output; the fixed “add one” stays the same.</p></details>
+</section>
+<section class="lesson" id="s2">
+<div class="section-top"><span class="num">02</span><h2>Adding or multiplying?</h2></div>
+<div class="story"><p>Two games start you with one credit. The first gives you one extra credit each round. The second doubles whatever you already have. They match after the first round, but then the doubling game pulls away.</p></div>
+<p class="mapping"><strong>Connect it:</strong> equal rounds represent equal input steps. Adding gives <span class="math">1 + n</span>; doubling gives <span class="math">2<sup>n</sup></span>. Exponential growth repeats a factor, so its increases need not stay equal.</p>
+<div class="controls"><label class="slider-label" for="round">Round n <input id="round" type="range" min="0" max="5" step="1" value="1"></label></div>
+<div class="button-row"><button class="primary" data-action="round-next">Next round</button><button data-action="reset" data-section="2">Reset</button></div>
+<div class="legend"><span>Doubling: 2ⁿ</span><span class="lg-orange">Adding: 1 + n</span></div>
+<div class="plot"><svg id="svg2" viewBox="0 0 720 400" role="img" aria-labelledby="title2 desc2"><title id="title2">Compare fixed addition with repeated multiplication</title><desc id="desc2">Separate points show the two credit totals at whole-number rounds.</desc></svg></div><div class="readout" id="read2" aria-live="polite"></div>
+<p class="question">Predict: does the doubling game add the same number of credits each round?</p><details><summary>Check your idea</summary><p>No. The multiplying factor stays at two, but the increases are 1, 2, 4, 8, 16. A bigger starting amount produces a bigger increase.</p></details>
+<p class="boundary">This game uses whole rounds. The mathematical exponential function also has values between whole-number inputs.</p>
+</section>
+<section class="lesson" id="s3">
+<div class="section-top"><span class="num">03</span><h2>Rewind the multiplying process</h2></div>
+<div class="story"><p>At the start of a film, a glowing bar has length one. Each forward step doubles its length. Rewind the film: each backward step halves it. The bar becomes smaller, but it never acquires a negative length.</p></div>
+<p class="mapping"><strong>Connect it:</strong> position zero has value <span class="math">2<sup>0</sup> = 1</span>. Moving backwards divides: <span class="math">2<sup>−1</sup> = ½</span> and <span class="math">2<sup>−2</sup> = ¼</span>. A negative exponent means reciprocal, not a negative output.</p>
+<div class="button-row"><button class="primary" data-action="power-back">One step back ÷ 2</button><button data-action="power-forward">One step forward × 2</button><button data-action="reset" data-section="3">Reset</button></div>
+<div class="plot"><svg id="svg3" viewBox="0 0 720 360" role="img" aria-labelledby="title3 desc3"><title id="title3">Powers of two extend backwards through zero</title><desc id="desc3">A highlighted position connects an exponent to its positive value. A magnified bar shows small values without changing them.</desc></svg></div><div class="readout" id="read3" aria-live="polite"></div>
+<p class="question">Predict: after three backward steps from one, is the value negative, zero or positive?</p><details><summary>Check your idea</summary><p>Positive: one eighth. Dividing a positive amount by two keeps it positive. This also explains why e raised to a negative power remains positive.</p></details>
+<p class="boundary">The animation shows exponents from −4 to 3. The mathematics continues beyond that range. A finite display cannot demonstrate infinitely many steps.</p>
+</section>
+<section class="lesson" id="s4">
+<div class="section-top"><span class="num">04</span><h2>A point and a slope make a line</h2></div>
+<div class="story"><p>Fix one end of a straight ramp at a marked height. You can tilt it upwards, keep it level, or tilt it downwards. Moving the whole ramp higher changes its position; changing its tilt changes how much it rises for each step across.</p></div>
+<p class="mapping"><strong>Connect it:</strong> slope = vertical change ÷ horizontal change. Here the marked point is <span class="math">(0, b)</span>. Choosing its height and the slope fixes the line.</p>
+<div class="controls"><label class="slider-label" for="slope-m">Slope m <input id="slope-m" type="range" min="-2" max="2" step="0.25" value="1"></label><label class="slider-label" for="line-b">Height b <input id="line-b" type="range" min="-2" max="2" step="0.5" value="1"></label></div>
+<div class="button-row"><button class="primary" data-action="slope-tilt">Tilt downwards</button><button data-action="line-lift">Lift without tilting</button><button data-action="reset" data-section="4">Reset</button></div>
+<div class="legend"><span>Line</span><span class="lg-green">One step across, then the vertical change</span></div>
+<div class="plot"><svg id="svg4" viewBox="0 0 720 400" role="img" aria-labelledby="title4 desc4"><title id="title4">A line with an adjustable point and slope</title><desc id="desc4">The slope triangle has horizontal change one. A negative slope gives a downward vertical change.</desc></svg></div><div class="readout" id="read4" aria-live="polite"></div>
+<p class="formula math">Through (a, b), with slope m: &nbsp; y − b = m(x − a).</p>
+<p class="question">Predict: if the entire ramp is lifted, does its slope change?</p><details><summary>Check your idea</summary><p>No. Both ends move up equally, so their difference in height is unchanged. The slope depends on the changes between points, not the height of either point alone.</p></details>
+</section>
+<section class="lesson" id="s5">
+<div class="section-top"><span class="num">05</span><h2>An amount is different from a rate</h2></div>
+<div class="story"><p>A toy car rolls faster and faster. Watch two readings: how far it has travelled, and how fast it is moving now. The first tells you the total distance so far. The second tells you how quickly that distance is changing.</p></div>
+<p class="mapping"><strong>Connect it:</strong> in this simple model, <span class="math">d(t) = t²</span> metres and <span class="math">d′(t) = 2t</span> metres per second. Graph height is distance; tangent slope is speed.</p>
+<div class="controls"><label class="slider-label" for="time-t">Time t <input id="time-t" type="range" min="0" max="3" step="0.1" value="1"></label></div>
+<div class="button-row"><button class="primary" data-action="car-run">Move to 3 seconds</button><button data-action="reset" data-section="5">Reset</button></div>
+<div class="legend"><span>Distance curve</span><span class="lg-purple">Tangent: local rate</span><span class="lg-green">Height above zero</span></div>
+<div class="plot"><svg id="svg5" viewBox="0 0 720 400" role="img" aria-labelledby="title5 desc5"><title id="title5">Distance and speed describe different aspects of a journey</title><desc id="desc5">The curve is distance against time. The vertical guide shows distance, while the tangent and its triangle show speed.</desc></svg></div><div class="readout" id="read5" aria-live="polite"></div>
+<p class="question">At two seconds, both readings show four. Does that make distance and speed the same thing?</p><details><summary>Check your idea</summary><p>No: 4 metres and 4 metres per second have different meanings and units. At three seconds, the readings are 9 metres and 6 metres per second. Equal numbers do not make the quantities identical.</p></details>
+<p class="boundary">This is an illustrative motion model over 0–3 seconds, not a measurement of a real car.</p>
+</section>
+<p class="part">Part B · Discover why e is special</p>
+<section class="lesson" id="s6">
+<div class="section-top"><span class="num">06</span><h2>From two points to one local slope</h2></div>
+<div class="story"><p>Imagine measuring how steep a curved path is at one spot. A straight ruler joining two distant points gives an average steepness. Keep one point fixed and bring the other closer. The ruler settles towards the path’s local direction.</p></div>
+<p class="mapping"><strong>Connect it:</strong> for <span class="math">y = 2ˣ</span>, hold <span class="math">A = (0, 1)</span> fixed and move <span class="math">B = (h, 2ʰ)</span>. Their secant slope is <span class="math">(2ʰ − 1) / h</span>.</p>
+<div class="button-row"><button class="primary" data-action="closer">Bring B closer</button><button data-action="other-side">Try the other side</button><button data-action="zero-h">What if h = 0?</button><button data-action="reset" data-section="6">Reset</button></div>
+<div class="legend"><span>Curve</span><span class="lg-red">Secant through A and B</span><span class="lg-purple">Limiting tangent at A</span></div>
+<div class="plot"><svg id="svg6" viewBox="0 0 720 400" role="img" aria-labelledby="title6 desc6"><title id="title6">A secant approaches a tangent from either side</title><desc id="desc6">A is fixed at zero, one. B approaches A without being used at an interval of zero. At zero the secant quotient is undefined.</desc></svg></div><div class="readout" id="read6" aria-live="polite"></div>
+<p class="question">When both changes become tiny, must their ratio approach zero?</p><details><summary>Check your idea</summary><p>No. Two shrinking quantities can have a nonzero ratio. Here the secant slopes approach about 0.693147. At h = 0 the quotient is 0/0 and undefined; the limiting tangent slope still exists.</p></details>
+<p class="boundary">The purple tangent shows the established limiting value for comparison. This finite animation illustrates the limit; it does not prove it. A tangent matches local slope and need not meet a curve only once.</p>
+</section>
+<section class="lesson" id="s7">
+<div class="section-top"><span class="num">07</span><h2>Choose the base: find e</h2></div>
+<div class="story"><p>Several curved paths pass through the same meeting point. Notice that some head uphill more sharply than others. Adjust one path until, at that meeting point, its local slope is exactly one. That setting has a special name.</p></div>
+<p class="mapping"><strong>Connect it:</strong> all positive bases give <span class="math">a⁰ = 1</span>, so the curves meet at <span class="math">(0, 1)</span>. The base called <span class="math">e ≈ 2.71828</span> gives tangent slope exactly 1 there.</p>
+<div class="controls"><label class="slider-label" for="base-a">Base a <input id="base-a" type="range" min="0.5" max="3.5" step="0.01" value="2"></label></div>
+<div class="button-row"><button data-base="0.5">½</button><button data-base="1">1</button><button data-base="2">2</button><button class="primary" data-base="e">Choose e</button><button data-base="3">3</button><button data-action="reset" data-section="7">Reset</button></div>
+<div class="legend"><span>Selected exponential</span><span class="lg-purple">Its tangent at (0, 1)</span><span class="lg-green">Reference slope 1</span></div>
+<div class="plot"><svg id="svg7" viewBox="0 0 720 400" role="img" aria-labelledby="title7 desc7"><title id="title7">Change the base while preserving the point zero, one</title><desc id="desc7">The curve and its tangent change with the base. At base e the tangent matches the reference line of slope one.</desc></svg></div><div class="readout" id="read7" aria-live="polite"></div>
+<p class="question">Predict: can a curve stay above zero while its slope is negative? Try base ½.</p><details><summary>Check your idea</summary><p>Yes. The curve for base ½ is positive but decreases as x increases. Height and slope describe different things. Base 1 gives a horizontal line; bases above 1 give increasing curves.</p></details>
+<p class="boundary">e is a fixed number, not a variable. “Choose e” uses the browser’s stored approximation. The exact property comes from mathematics, not from tuning a finite slider or rounding a readout to 1.</p>
+</section>
+<section class="lesson" id="s8">
+<div class="section-top"><span class="num">08</span><h2>For eˣ, height and slope match</h2></div>
+<div class="story"><p>Follow the special curve and take two readings at each stop: its height and its local slope. Wherever you stop, the numbers match. Far to the left both are small; farther right both are larger. They still describe different features.</p></div>
+<p class="mapping"><strong>Connect it:</strong> for <span class="math">f(x) = eˣ</span>, <span class="math">f′(x) = eˣ</span>. Move the point. The vertical guide measures height; the small tangent triangle measures slope as rise ÷ run.</p>
+<div class="controls"><label class="slider-label" for="exp-x">Position x <input id="exp-x" type="range" min="-6" max="1.5" step="0.05" value="0"></label></div>
+<div class="button-row"><button class="primary" data-action="exp-right">Explore right</button><button data-action="exp-left">Explore far left</button><button data-action="reset" data-section="8">Reset</button></div>
+<div class="legend"><span>Curve eˣ</span><span class="lg-purple">Tangent</span><span class="lg-green">Height</span></div>
+<div class="plot"><svg id="svg8" viewBox="0 0 720 400" role="img" aria-labelledby="title8 desc8"><title id="title8">The height and tangent slope of e to the x have equal values</title><desc id="desc8">Moving left gives positive values approaching zero; moving right increases both height and slope.</desc></svg></div><div class="readout" id="read8" aria-live="polite"></div>
+<p class="question">Predict: at a negative input, is the height negative? Is the slope negative?</p><details><summary>Check your idea</summary><p>Neither. Both equal e raised to that negative input, which is a positive reciprocal. The curve remains above the x-axis and is increasing. It approaches y = 0 as x heads towards negative infinity, without reaching zero at any finite input.</p></details>
+<p class="boundary">Domain: all real inputs. Range: positive outputs. Intercept: (0, 1). Horizontal asymptote: y = 0 on the left. A tiny positive height may look like zero on a screen; the readout helps distinguish them. Section 10 connects the slope rule to the algebra.</p>
+</section>
+<section class="lesson" id="s9">
+<div class="section-top"><span class="num">09</span><h2>Lift the curve or stretch it</h2></div>
+<div class="story"><p>Copy a curved track onto a transparent sheet. Sliding the sheet upwards lifts every point equally, leaving the slopes unchanged. Stretching the drawing vertically is different: the rises become larger over the same horizontal distances, so the slopes change too.</p></div>
+<p class="mapping"><strong>Connect it:</strong> compare the original <span class="math">eˣ</span> with <span class="math">g(x) = keˣ + c</span>. We inspect both at <span class="math">x = 0</span>. Here k controls stretching; c controls lifting.</p>
+<div class="controls"><label class="slider-label" for="scale-k">Multiplier k <input id="scale-k" type="range" min="0.5" max="3" step="0.5" value="1"></label><label class="slider-label" for="shift-c">Shift c <input id="shift-c" type="range" min="-3" max="3" step="0.5" value="0"></label></div>
+<div class="button-row"><button class="primary" data-action="shift-up">Lift by 2</button><button data-action="stretch">Stretch to 3 times</button><button data-action="reset" data-section="9">Reset</button></div>
+<div class="legend"><span>Original eˣ</span><span class="lg-red">Changed curve</span><span class="lg-purple">Changed tangent at x = 0</span></div>
+<div class="plot"><svg id="svg9" viewBox="0 0 720 400" role="img" aria-labelledby="title9 desc9"><title id="title9">Compare vertical translation with vertical scaling</title><desc id="desc9">The reference exponential remains in blue while the changed curve shows how height and slope respond to its multiplier and shift.</desc></svg></div><div class="readout" id="read9" aria-live="polite"></div>
+<p class="formula math">g′(x) = keˣ &nbsp; — the constant c contributes zero.</p>
+<p class="question">Predict: with k = 1 and c = −3, can the height be negative while the slope stays positive?</p><details><summary>Check your idea</summary><p>Yes. At x = 0, the height is −2 and the slope is 1. Being below the axis does not mean decreasing. With c = 0, height and slope also match for keˣ; adding a nonzero c breaks that equality.</p></details>
+</section>
+<section class="lesson" id="s10">
+<div class="section-top"><span class="num">10</span><h2>Connect the pictures to the algebra</h2></div>
+<p>The pictures give you something to think with. These short mathematical connections explain the important steps. Keep x fixed while h changes.</p>
+<ol class="steps">
+<li><strong>An extra input interval adds a multiplying factor.</strong><p class="math">e<sup>x+h</sup> = eˣeʰ</p><p class="small">This is the index law. For instance, 2³ × 2² = 2⁵: three factors of two and another two factors give five factors in total. The law also holds for real exponents with a positive base.</p></li>
+<li><strong>Factor out what the two heights share.</strong><p class="math">e<sup>x+h</sup> − eˣ = eˣ(eʰ − 1)</p><p class="small">Compare 5 × 7 − 5 = 5(7 − 1). The common factor is not lost; it multiplies the whole bracket.</p></li>
+<li><strong>Divide the change in height by the interval.</strong><p class="math">(e<sup>x+h</sup> − eˣ) / h = eˣ · (eʰ − 1) / h, &nbsp; h ≠ 0</p><p class="small">The factor eˣ stays fixed. The remaining quotient is the same one used to investigate slope at (0, 1).</p></li>
+<li><strong>Use the established limiting property of e.</strong><p>As h approaches zero, (eʰ − 1) / h approaches 1. Therefore the derivative is <span class="math">eˣ × 1 = eˣ</span>.</p><p class="small">A table or animation suggests the behaviour; this step uses the exact established limit. It does not substitute h = 0.</p></li>
+</ol>
+<details><summary>Earlier derivative rules: a quick reminder</summary>
+<table class="math-table"><thead><tr><th>Expression</th><th>Derivative</th><th>Reason</th></tr></thead><tbody><tr><td>x⁴</td><td>4x³</td><td>The earlier power rule: the variable is the base.</td></tr><tr><td>e⁴</td><td>0</td><td>This is one constant number.</td></tr><tr><td>eˣ</td><td>eˣ</td><td>The variable is the exponent; use the rule developed here.</td></tr><tr><td>2eˣ + x² − 5</td><td>2eˣ + 2x</td><td>Differentiate each term; keep constant multipliers.</td></tr></tbody></table>
+<p>If the power rule or factoring is still unfamiliar, use the fuller prerequisite review before relying on it in a new calculation.</p></details>
+<details><summary>One point + its derivative = the tangent line</summary><p>For <span class="math">f(x) = 2eˣ + 1</span> at x = 0, the point is (0, 3) and the slope is 2. Section 4 then gives <span class="math">y − 3 = 2(x − 0)</span>, so <span class="math">y = 2x + 3</span>. Calculate the point value and slope separately.</p></details>
+<div class="footer-check"><strong>Before you leave</strong><p style="margin:8px 0 0">Explain aloud: “A height tells me …; a slope tells me …; e is special because …” Then return to M01 and try a worked example with the explanation covered.</p></div>
+</section>
+<footer><p><a href="#">Back to the beginning</a></p><p>The stories and diagrams work offline. No answers or activity are uploaded or stored.</p></footer>
+</main>
+<script>
+'use strict';
+const NS='http://www.w3.org/2000/svg';
+const state={x:1,n:1,p:0,m:1,b:1,t:1,h:1,a:2,exactE:false,z:0,k:1,c:0};
+const reduced=document.getElementById('reduce-motion');reduced.checked=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt=(n,d=3)=>Math.abs(n)<1e-12?'0':Number(n.toFixed(d)).toString().replace('-','−');
+const el=(tag,attrs={},text)=>{let n=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n};
+function raw(svg,tag,attrs,text){const n=el(tag,attrs,text);svg.append(n);return n}
+function clear(id){const s=document.getElementById('svg'+id);s.querySelectorAll(':scope > :not(title):not(desc)').forEach(n=>n.remove());return s}
+function label(s,x,y,text,attrs={}){return raw(s,'text',{x,y,...attrs},text)}
+function chart(id,opt={}){
+ const s=clear(id),W=720,H=opt.H||400,left=70,right=28,top=opt.top||34,bottom=60;
+ const [xmin,xmax]=opt.x||[-2,3],[ymin,ymax]=opt.y||[-2,8],pw=W-left-right,ph=H-top-bottom;
+ const X=x=>left+(x-xmin)/(xmax-xmin)*pw,Y=y=>top+(ymax-y)/(ymax-ymin)*ph;
+ const defs=raw(s,'defs'),cp=raw(defs,'clipPath',{id:'clip'+id});raw(cp,'rect',{x:left,y:top,width:pw,height:ph});
+ for(const x of opt.xt||[xmin,(xmin+xmax)/2,xmax]){raw(s,'line',{x1:X(x),x2:X(x),y1:top,y2:H-bottom,class:'grid'});label(s,X(x),H-bottom+25,fmt(x),{'text-anchor':'middle',class:'tick'})}
+ for(const y of opt.yt||[ymin,(ymin+ymax)/2,ymax]){raw(s,'line',{x1:left,x2:W-right,y1:Y(y),y2:Y(y),class:'grid'});label(s,left-12,Y(y)+5,fmt(y),{'text-anchor':'end',class:'tick'})}
+ if(ymin<=0&&ymax>=0)raw(s,'line',{x1:left,x2:W-right,y1:Y(0),y2:Y(0),class:'axis'});
+ if(xmin<=0&&xmax>=0)raw(s,'line',{x1:X(0),x2:X(0),y1:top,y2:H-bottom,class:'axis'});
+ label(s,(left+W-right)/2,H-12,opt.xl||'Input x',{'text-anchor':'middle',class:'axis-label'});
+ label(s,left,top-14,opt.yl||'Output y',{class:'axis-label'});
+ const g=raw(s,'g',{'clip-path':'url(#clip'+id+')'});
+ const line=(x1,y1,x2,y2,cls='guide')=>raw(g,'line',{x1:X(x1),y1:Y(y1),x2:X(x2),y2:Y(y2),class:cls});
+ const curve=(f,cls='curve blue')=>{let d='';for(let i=0;i<=240;i++){let x=xmin+(xmax-xmin)*i/240,y=f(x);if(!Number.isFinite(y))continue;d+=(d?'L':'M')+X(x).toFixed(3)+','+Y(y).toFixed(3)}return raw(g,'path',{d,class:cls})};
+ const dot=(x,y,color='blue',r=5)=>raw(g,'circle',{cx:X(x),cy:Y(y),r,fill:'var(--'+color+')',stroke:'var(--paper)','stroke-width':2});
+ return {s,g,X,Y,line,curve,dot,label:(x,y,text,attrs={})=>label(s,X(x),Y(y),text,attrs)};
+}
+function read(id,text,speak=true){if(speak)document.getElementById('read'+id).textContent=text}
+function triangle(q,x,y,m,dx=1){q.line(x,y,x+dx,y,'curve green');q.line(x+dx,y,x+dx,y+m*dx,'curve green')}
+function sync(id,value){document.getElementById(id).value=value}
+const render={
+1(speak=true){let x=state.x,y=2*x+1;sync('input-x',x);let q=chart(1,{H:440,top:108,x:[-2.5,3.5],y:[-5,9],xt:[-2,-1,0,1,2,3],yt:[-4,0,4,8]});
+const boxes=[[70,'Input: '+fmt(x)],[288,'× 2, then + 1'],[506,'Output: '+fmt(y)]];for(const [bx,txt]of boxes){raw(q.s,'rect',{x:bx,y:12,width:180,height:46,rx:8,fill:'var(--soft)'});label(q.s,bx+90,42,txt,{'text-anchor':'middle'})}label(q.s,269,42,'→',{'text-anchor':'middle'});label(q.s,487,42,'→',{'text-anchor':'middle'});
+q.curve(v=>2*v+1);q.line(x,0,x,y);q.dot(x,y);read(1,`Input ${fmt(x)} → double and add one → output ${fmt(y)}. The graph point is (${fmt(x)}, ${fmt(y)}).`,speak)},
+2(speak=true){const n=state.n;sync('round',Math.round(n));document.querySelector('[data-action="round-next"]').textContent=n>=5?'Start rounds again':'Next round';let q=chart(2,{x:[-.3,5.3],y:[0,34],xt:[0,1,2,3,4,5],yt:[0,8,16,24,32],xl:'Whole-number round n',yl:'Credits'});for(let i=0;i<=Math.floor(n+1e-8);i++){q.dot(i,2**i,'blue',6);q.dot(i,1+i,'orange',4)}let k=Math.round(n);read(2,`Round ${k}: doubling gives ${2**k} credits; adding gives ${1+k}. ${k>0?'This round’s doubling increase is '+2**(k-1)+' credits.':'Both start at one credit.'}`,speak)},
+3(speak=true){const p=Math.round(state.p),v=2**p,s=clear(3);label(s,40,38,'Exponent: steps from the starting value');for(let i=-4;i<=3;i++){let x=68+(i+4)*83;raw(s,'rect',{x:x-28,y:62,width:56,height:43,rx:8,fill:i===p?'var(--blue)':'var(--soft)'});label(s,x,91,fmt(i),{'text-anchor':'middle',style:i===p?'fill:var(--paper)':''});label(s,x,139,fmt(2**i,4),{'text-anchor':'middle',class:'tick'})}label(s,40,184,'Value at the highlighted step: '+fmt(v,4));
+const max=v>1?8:1,barW=570;raw(s,'rect',{x:70,y:211,width:barW,height:38,rx:5,fill:'var(--soft)'});raw(s,'rect',{x:70,y:211,width:barW*v/max,height:38,rx:4,fill:'var(--green)'});label(s,70,278,'0',{class:'tick'});label(s,640,278,fmt(max),{'text-anchor':'end',class:'tick'});label(s,70,318,`Bar scale: 0 to ${max}. ${max===1?'Small values are shown on a closer scale.':'The whole bar would represent 8.'}`,{class:'axis-label'});
+read(3,`Exponent ${fmt(p)} gives 2^(${fmt(p)}) = ${fmt(v,4)}. ${p<0?'A positive reciprocal, not a negative amount.':p===0?'The starting value is one, not zero.':'Each forward step doubles the preceding value.'}`,speak)},
+4(speak=true){let{m,b}=state;document.querySelector('[data-action="line-lift"]').textContent=b>=2?'Lower without tilting':'Lift without tilting';sync('slope-m',m);sync('line-b',b);let q=chart(4,{x:[-2,3],y:[-5,6],xt:[-2,-1,0,1,2,3],yt:[-4,-2,0,2,4,6]});q.curve(x=>m*x+b);triangle(q,0,b,m);q.dot(0,b);q.dot(1,b+m,'green');read(4,`Point (0, ${fmt(b)}). Run = 1; vertical change = ${fmt(m)}. Slope = ${fmt(m)} ÷ 1 = ${fmt(m)}. Line: y = ${fmt(m)}x ${b<0?'−':'+'} ${fmt(Math.abs(b))}.`,speak)},
+5(speak=true){let t=state.t,d=t*t,m=2*t;sync('time-t',t);let q=chart(5,{x:[0,3.7],y:[0,14],xt:[0,1,2,3],yt:[0,4,8,12],xl:'Time t (seconds)',yl:'Distance d (metres)'});q.curve(x=>x*x);q.curve(x=>d+m*(x-t),'tangent purple');q.line(t,0,t,d,'curve green');triangle(q,t,d,m,.5);q.dot(t,d);read(5,`At ${fmt(t,1)} s: distance = ${fmt(d,2)} m; speed = ${fmt(m,2)} m/s. On the tangent, a 0.5 s run has a ${fmt(m*.5,2)} m rise.`,speak)},
+6(speak=true){let h=state.h;document.querySelector('[data-action="closer"]').textContent=h===0?'Try a small interval':Math.abs(h)<=.00100001?'Start with a wide interval':'Bring B closer';let q=chart(6,{x:[-1.25,1.25],y:[0,3],xt:[-1,-.5,0,.5,1],yt:[0,1,2,3]});q.curve(x=>2**x);q.curve(x=>1+Math.LN2*x,'tangent purple');if(h!==0){const m=Math.expm1(h*Math.LN2)/h;q.curve(x=>1+m*x,'curve red');q.line(0,1,h,1);q.line(h,1,h,2**h);q.dot(h,2**h,'red',6);read(6,`h = ${fmt(h,5)}. Secant slope = ${m.toFixed(6)}. Limiting tangent slope ≈ ${Math.LN2.toFixed(6)}. ${Math.abs(h)<.01?'The points may look merged, but h is still nonzero.':''}`,speak)}else{read(6,'h = 0: A and B coincide. The secant quotient is 0/0, so it is undefined. The limiting tangent remains; it was not found by dividing zero by zero.',speak)}q.dot(0,1,'blue',5);q.label(0,1,'A: (0, 1)',{dx:12,dy:30});},
+7(speak=true){let a=state.a,m=Math.log(a);sync('base-a',a);let q=chart(7,{x:[-1.1,1.1],y:[-.4,4],xt:[-1,-.5,0,.5,1],yt:[0,1,2,3,4]});q.curve(x=>1+x,'tangent green');q.curve(x=>a**x);q.curve(x=>1+m*x,'tangent purple');q.dot(0,1);read(7,`Base ${state.exactE?'e ≈ '+Math.E.toFixed(5):fmt(a,3)}: height at x = 0 is 1. Tangent slope ${state.exactE?'= 1 exactly (the defining property).':'≈ '+m.toFixed(5)+'.'} ${a<1?'Positive curve, negative slope.':a===1?'Constant curve, zero slope.':''}`,speak)},
+8(speak=true){let x=state.z,y=Math.exp(x);sync('exp-x',x);let q=chart(8,{x:[-6.5,2],y:[-.4,8],xt:[-6,-4,-2,0,2],yt:[0,2,4,6,8]});q.curve(Math.exp);q.curve(v=>y+y*(v-x),'tangent purple');q.line(x,0,x,y,'curve green');triangle(q,x,y,y,.5);q.dot(x,y);read(8,`At x = ${fmt(x,2)}: height = ${y.toFixed(6)}; tangent slope = ${y.toFixed(6)}. Triangle: rise ${(.5*y).toFixed(6)} ÷ run 0.5. ${x< -3?'Tiny and positive—not zero.':''}`,speak)},
+9(speak=true){let{k,c}=state;sync('scale-k',k);sync('shift-c',c);let q=chart(9,{x:[-1.2,1.2],y:[-4,14],xt:[-1,-.5,0,.5,1],yt:[-4,0,4,8,12]});q.curve(Math.exp);q.curve(x=>k*Math.exp(x)+c,'curve red');q.curve(x=>k+c+k*x,'tangent purple');q.dot(0,k+c,'red');read(9,`k = ${fmt(k)}; c = ${fmt(c)}. At x = 0: height = k + c = ${fmt(k+c)}; slope = k = ${fmt(k)}. ${c===0?'Height and slope match here.':'The shift changes height without changing slope.'}`,speak)}
+};
+function animate(section,key,target,options={}){
+ const start=state[key],card=document.getElementById('s'+section),controls=[...card.querySelectorAll('button,input')];
+ if(reduced.checked||start===target){state[key]=target;if(options.end)options.end();render[section]();return}
+ controls.forEach(c=>c.disabled=true);const t0=performance.now();
+ function frame(now){let p=Math.min(1,(now-t0)/800),ease=p*p*(3-2*p);state[key]=start+(target-start)*ease;render[section](false);if(p<1)requestAnimationFrame(frame);else{state[key]=target;if(options.end)options.end();render[section]();controls.forEach(c=>c.disabled=false)}}requestAnimationFrame(frame)
+}
+const defaults={1:{x:1},2:{n:1},3:{p:0},4:{m:1,b:1},5:{t:1},6:{h:1},7:{a:2,exactE:false},8:{z:0},9:{k:1,c:0}};
+const bindings={'input-x':[1,'x'],'round':[2,'n'],'slope-m':[4,'m'],'line-b':[4,'b'],'time-t':[5,'t'],'base-a':[7,'a'],'exp-x':[8,'z'],'scale-k':[9,'k'],'shift-c':[9,'c']};
+for(const[id,[section,key]]of Object.entries(bindings))document.getElementById(id).addEventListener('input',e=>{state[key]=Number(e.target.value);if(key==='a')state.exactE=false;render[section]()});
+document.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+ if(b.dataset.base){const exact=b.dataset.base==='e';state.exactE=false;animate(7,'a',exact?Math.E:Number(b.dataset.base),{end:()=>state.exactE=exact});return}
+ const action=b.dataset.action;if(action==='reset'){let n=Number(b.dataset.section);Object.assign(state,defaults[n]);render[n]();return}
+ switch(action){
+ case 'input-run':animate(1,'x',state.x<2?3:-2);break;
+ case 'round-next':animate(2,'n',Math.round(state.n)>=5?0:Math.round(state.n)+1);break;
+ case 'power-back':animate(3,'p',Math.max(-4,Math.round(state.p)-1));break;
+ case 'power-forward':animate(3,'p',Math.min(3,Math.round(state.p)+1));break;
+ case 'slope-tilt':animate(4,'m',-1);break;
+ case 'line-lift':animate(4,'b',state.b>=2?-2:Math.min(2,state.b+1));break;
+ case 'car-run':animate(5,'t',3);break;
+ case 'closer':animate(6,'h',state.h===0?.1:Math.abs(state.h)<=.00100001?Math.sign(state.h):state.h/10);break;
+ case 'other-side':state.h=state.h===0?-.1:-state.h;render[6]();break;
+ case 'zero-h':state.h=0;render[6]();break;
+ case 'exp-right':animate(8,'z',1.5);break;
+ case 'exp-left':animate(8,'z',-6);break;
+ case 'shift-up':animate(9,'c',2);break;
+ case 'stretch':animate(9,'k',3);break;
+ }
+}));
+for(let i=1;i<=9;i++)render[i]();
+</script>
+</body>
+</html>
