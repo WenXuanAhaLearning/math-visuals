@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Complex Numbers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --border-color: #e5e7eb;
+            --accent-bg: #f9fafb;
+            --btn-hover: #e5e7eb;
+            --btn-active: #d1d5db;
+            
+            --axis-color: #9ca3af;
+            --grid-color: #f3f4f6;
+            
+            /* Required Colors */
+            --color-blue: #3b82f6;
+            --color-red: #ef4444;
+            --color-green: #10b981;
+            --color-purple: #8b5cf6;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark Theme */
+                --bg-color: #111827;
+                --card-bg: #1f2937;
+                --text-main: #f9fafb;
+                --text-muted: #d1d5db;
+                --border-color: #374151;
+                --accent-bg: #111827;
+                --btn-hover: #374151;
+                --btn-active: #4b5563;
+                
+                --axis-color: #6b7280;
+                --grid-color: #1f2937;
+                
+                --color-blue: #60a5fa;
+                --color-red: #f87171;
+                --color-green: #34d399;
+                --color-purple: #a78bfa;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 600px;
+        }
+
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--border-color);
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            background-color: var(--card-bg);
+        }
+        
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 1 0 auto;
+            padding: 1.25rem 1.25rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--accent-bg);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            color: var(--color-purple);
+            border-bottom-color: var(--color-purple);
+            background-color: var(--accent-bg);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2.5rem;
+            animation: fadeIn 0.3s ease;
+            flex: 1;
+        }
+
+        .tab-content.active {
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            align-items: stretch;
+        }
+
+        .tab-left {
+            flex: 0 0 40%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explanation {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 2.5rem;
+            background-color: var(--accent-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--color-purple);
+            line-height: 1.6;
+        }
+
+        .svg-container {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            background-color: var(--bg-color);
+            border-radius: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .svg-container.square {
+            aspect-ratio: 1 / 1;
+            height: auto;
+        }
+
+        svg { width: 100%; height: 100%; max-height: 500px; }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .action-btn {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .action-btn:hover { background-color: var(--btn-hover); }
+        
+        .action-btn.active-toggle {
+            background-color: var(--btn-active);
+            border-color: var(--text-muted);
+        }
+
+        .action-btn.primary {
+            background-color: var(--color-purple);
+            color: white;
+            border-color: var(--color-purple);
+        }
+
+        .action-btn.primary:hover {
+            filter: brightness(1.1);
+        }
+
+        .axis { stroke: var(--axis-color); stroke-width: 1.5; }
+        .axis-label { fill: var(--text-muted); font-size: 12px; font-weight: 600; font-family: 'Inter'; }
+        .grid-line { stroke: var(--axis-color); stroke-width: 1; stroke-dasharray: 4,4; opacity: 0.3; }
+        
+        .point { fill: var(--color-purple); }
+        .point-label { fill: var(--text-main); font-size: 14px; font-weight: 600; text-anchor: middle; font-family: 'Inter'; }
+        
+        .color-blue { stroke: var(--color-blue); fill: var(--color-blue); }
+        .color-red { stroke: var(--color-red); fill: var(--color-red); }
+        .color-green { stroke: var(--color-green); fill: var(--color-green); }
+        .color-purple { stroke: var(--color-purple); fill: var(--color-purple); }
+        
+        .text-blue { fill: var(--color-blue); font-size: 13px; font-weight: 600; font-family: 'Inter'; }
+        .text-red { fill: var(--color-red); font-size: 13px; font-weight: 600; font-family: 'Inter'; }
+        .text-green { fill: var(--color-green); font-size: 13px; font-weight: 600; font-family: 'Inter'; }
+        
+        .vector { stroke-width: 2.5; fill: none; }
+        .vector-dash { stroke-width: 2; stroke-dasharray: 4,4; fill: none; }
+        .guide-line { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 4,4; fill: none; opacity: 0.7;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs" id="tabContainer" role="tablist">
+            <button class="tab-btn active" data-target="tab1">What is i</button>
+            <button class="tab-btn" data-target="tab2">The complex plane</button>
+            <button class="tab-btn" data-target="tab3">Addition</button>
+            <button class="tab-btn" data-target="tab4">Conjugate</button>
+            <button class="tab-btn" data-target="tab5">Modulus</button>
+            <button class="tab-btn" data-target="tab6">Argument</button>
+            <button class="tab-btn" data-target="tab7">Multiplication</button>
+            <button class="tab-btn" data-target="tab8">Two systems</button>
+            <button class="tab-btn" data-target="tab9">Powers of i</button>
+            <button class="tab-btn" data-target="tab10">Reference angle</button>
+        </div>
+
+        <div id="tab1" class="tab-content active">
+            <div class="tab-left">
+                <div class="explanation">
+                    Multiplying by <strong>i</strong> means turning 90 degrees on the plane. Two turns make 180 degrees, which is the same as multiplying by negative one. That is the whole meaning of <strong>i² = -1</strong>.
+                </div>
+                <div class="controls">
+                    <button class="action-btn primary" id="btn-t1">Multiply by i (Turn 90°)</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-100 -100 200 200">
+                        <line x1="-90" y1="0" x2="90" y2="0" class="axis" marker-end="url(#arrow-axis)"/>
+                        <line x1="0" y1="90" x2="0" y2="-90" class="axis" marker-end="url(#arrow-axis)"/>
+                        <circle cx="0" cy="0" r="60" class="guide-line" />
+                        
+                        <text x="75" y="15" class="axis-label">1</text>
+                        <text x="-75" y="15" class="axis-label">-1</text>
+                        <text x="10" y="-65" class="axis-label">i</text>
+                        <text x="10" y="75" class="axis-label">-i</text>
+
+                        <path id="t1-arc" d="" fill="none" stroke="var(--color-purple)" stroke-width="2" marker-end="url(#arrow-purple)" opacity="0"/>
+                        <line id="t1-line" x1="0" y1="0" x2="60" y2="0" class="vector color-purple" />
+                        <circle id="t1-point" cx="60" cy="0" r="5" class="point" />
+                        <text id="t1-label" x="80" y="-10" class="point-label color-purple" font-size="16">1</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    A complex number has two coordinates: horizontal for the real part and vertical for the imaginary part. Every complex number is a point on this flat plane. A real number sits strictly on the horizontal axis, and a pure imaginary number sits strictly on the vertical axis.
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-100 -100 200 200">
+                        <!-- Scale: 20px = 1 unit -->
+                        <line x1="-90" y1="0" x2="90" y2="0" class="axis" marker-end="url(#arrow-axis)"/>
+                        <line x1="0" y1="90" x2="0" y2="-90" class="axis" marker-end="url(#arrow-axis)"/>
+                        <text x="80" y="-10" class="axis-label">Re</text>
+                        <text x="10" y="-80" class="axis-label">Im</text>
+
+                        <!-- Point 2+3i = (40, -60) -->
+                        <line x1="0" y1="0" x2="40" y2="-60" class="vector-dash color-purple" marker-end="url(#arrow-purple)"/>
+                        <circle cx="40" cy="-60" r="5" class="point" />
+                        <text x="65" y="-65" class="point-label">2 + 3i</text>
+
+                        <!-- Point 3 = (60, 0) -->
+                        <circle cx="60" cy="0" r="5" class="point" />
+                        <text x="60" y="20" class="point-label">3</text>
+
+                        <!-- Point -2i = (0, 40) -->
+                        <circle cx="0" cy="40" r="5" class="point" />
+                        <text x="25" y="45" class="point-label">-2i</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    Adding two complex numbers means walking in two directions separately. Real parts add together horizontally, imaginary parts add together vertically. Each direction minds its own business.
+                </div>
+                <div class="controls">
+                    <button class="action-btn primary" id="btn-t3">Add B to A</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container">
+                    <svg viewBox="-20 -120 180 140">
+                        <!-- Origin bottom left(-ish). Scale: 20px = 1 unit -->
+                        <line x1="-10" y1="0" x2="150" y2="0" class="axis" marker-end="url(#arrow-axis)"/>
+                        <line x1="0" y1="10" x2="0" y2="-110" class="axis" marker-end="url(#arrow-axis)"/>
+
+                        <!-- Vector A: 3+i -> (60, -20) -->
+                        <line x1="0" y1="0" x2="60" y2="-20" class="vector color-blue" marker-end="url(#arrow-blue)"/>
+                        <text x="65" y="-5" class="text-blue">A (3 + i)</text>
+
+                        <!-- Vector B: 1+2i -> rel(20, -40). From tip of A. End: (80, -60) -->
+                        <line id="t3-vec-b" x1="60" y1="-20" x2="60" y2="-20" class="vector color-red" />
+                        <text id="t3-label-b" x="90" y="-35" class="text-red" opacity="0">B (1 + 2i)</text>
+
+                        <!-- Result: 4+3i -> (80, -60) -->
+                        <line id="t3-vec-r" x1="0" y1="0" x2="80" y2="-60" class="vector-dash color-green" opacity="0"/>
+                        <text id="t3-label-r" x="20" y="-70" class="text-green" opacity="0">Result (4 + 3i)</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab4" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    The conjugate keeps the real part and flips the imaginary part. On the plane, it is a mirror reflection across the real horizontal axis. This is different from the negative, which flips both parts.
+                </div>
+                <div class="controls">
+                    <button class="action-btn" id="btn-t4-conj">Show Conjugate</button>
+                    <button class="action-btn" id="btn-t4-neg">Show Negative</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-100 -100 200 200">
+                        <!-- Scale: 20px = 1 unit -->
+                        <line x1="-90" y1="0" x2="90" y2="0" class="axis" marker-end="url(#arrow-axis)"/>
+                        <line x1="0" y1="90" x2="0" y2="-90" class="axis" marker-end="url(#arrow-axis)"/>
+                        <line x1="-90" y1="0" x2="90" y2="0" class="guide-line" stroke-width="3"/> <!-- Mirror -->
+
+                        <!-- Base point z: 2+3i (40, -60) -->
+                        <line x1="0" y1="0" x2="40" y2="-60" class="vector color-purple" marker-end="url(#arrow-purple)"/>
+                        <circle cx="40" cy="-60" r="5" class="point" />
+                        <text x="65" y="-65" class="point-label color-purple">z = 2+3i</text>
+
+                        <!-- Conjugate point: 2-3i (40, 60) -->
+                        <g id="t4-conj" style="opacity: 0; transition: opacity 0.3s;">
+                            <line x1="0" y1="0" x2="40" y2="60" class="vector-dash color-blue" marker-end="url(#arrow-blue)"/>
+                            <circle cx="40" cy="60" r="5" class="point color-blue" />
+                            <text x="75" y="75" class="text-blue">Conjugate (2-3i)</text>
+                        </g>
+
+                        <!-- Negative point: -2-3i (-40, 60) -->
+                        <g id="t4-neg" style="opacity: 0; transition: opacity 0.3s;">
+                            <line x1="0" y1="0" x2="-40" y2="60" class="vector-dash color-red" marker-end="url(#arrow-red)"/>
+                            <circle cx="-40" cy="60" r="5" class="point color-red" />
+                            <text x="-65" y="75" class="text-red">Negative (-2-3i)</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab5" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    The modulus is simply how far a point is from the center — a straight-line distance. The horizontal and vertical distances form a right triangle, and the modulus is the hypotenuse.
+                </div>
+                <div class="controls">
+                    <button class="action-btn primary" id="btn-t5">Draw Triangle</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container">
+                    <svg viewBox="-20 -110 120 130">
+                        <!-- Scale: 20px = 1 unit -->
+                        <line x1="-10" y1="0" x2="90" y2="0" class="axis" marker-end="url(#arrow-axis)"/>
+                        <line x1="0" y1="10" x2="0" y2="-100" class="axis" marker-end="url(#arrow-axis)"/>
+
+                        <!-- Point 3+4i (60, -80) -->
+                        <circle cx="60" cy="-80" r="5" class="point" />
+                        <text x="80" y="-85" class="point-label">3 + 4i</text>
+
+                        <!-- Triangle -->
+                        <line id="t5-leg-re" x1="0" y1="0" x2="0" y2="0" class="vector color-blue" />
+                        <text id="t5-txt-re" x="30" y="15" class="text-blue" opacity="0">Real = 3</text>
+
+                        <line id="t5-leg-im" x1="60" y1="0" x2="60" y2="0" class="vector color-red" />
+                        <text id="t5-txt-im" x="70" y="-40" class="text-red" opacity="0">Im = 4</text>
+
+                        <line id="t5-hyp" x1="0" y1="0" x2="0" y2="0" class="vector color-purple" />
+                        <rect id="t5-bg" x="18" y="-55" width="45" height="20" fill="var(--card-bg)" opacity="0"/>
+                        <text id="t5-txt-hyp" x="20" y="-40" class="point-label color-purple" opacity="0" font-size="16">|z| = 5</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab6" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    The argument is the direction a point faces, measured as an angle from the positive horizontal axis. Anticlockwise is positive, clockwise is negative. The exact same direction can be described by different angles.
+                </div>
+                <div class="controls">
+                    <button class="action-btn active-toggle" id="btn-t6-prin">Principal Argument</button>
+                    <button class="action-btn" id="btn-t6-neg">Negative Argument</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-100 -100 200 200">
+                        <line x1="-90" y1="0" x2="90" y2="0" class="axis" />
+                        <line x1="0" y1="90" x2="0" y2="-90" class="axis" />
+                        
+                        <!-- Point in QII, r=70, angle=120deg. (-35, -60.62) -->
+                        <line x1="0" y1="0" x2="-35" y2="-60.62" class="vector color-purple" />
+                        <circle cx="-35" cy="-60.62" r="5" class="point" />
+                        
+                        <!-- Principal arc (120deg) -->
+                        <g id="t6-prin">
+                            <!-- Arc from (25,0) to (-12.5, -21.65) -->
+                            <path d="M 25 0 A 25 25 0 0 0 -12.5 -21.65" fill="none" stroke="var(--color-blue)" stroke-width="3" marker-end="url(#arrow-blue)"/>
+                            <text x="-5" y="-30" class="text-blue">Principal (2π/3)</text>
+                        </g>
+
+                        <!-- Negative arc (-240deg) -->
+                        <g id="t6-neg" style="opacity: 0;">
+                            <!-- Arc from (35,0) clockwise to (-17.5, -30.31) -->
+                            <path d="M 35 0 A 35 35 0 1 1 -17.5 -30.31" fill="none" stroke="var(--color-red)" stroke-width="3" marker-end="url(#arrow-red)"/>
+                            <text x="5" y="45" class="text-red">Negative (-4π/3)</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab7" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    Multiplying two complex numbers means stretching the distance and turning the angle at the same time. Distances multiply, and angles add together.
+                </div>
+                <div class="controls">
+                    <button class="action-btn primary" id="btn-t7">Multiply (×2 distance, +30° turn)</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-100 -100 200 200">
+                        <line x1="-90" y1="0" x2="90" y2="0" class="axis" />
+                        <line x1="0" y1="90" x2="0" y2="-90" class="axis" />
+                        
+                        <!-- Guide circles r=40, r=80 -->
+                        <circle cx="0" cy="0" r="40" class="guide-line" />
+                        <circle cx="0" cy="0" r="80" class="guide-line" />
+                        <text x="40" y="15" class="axis-label" font-size="10">r=1</text>
+                        <text x="80" y="15" class="axis-label" font-size="10">r=2</text>
+
+                        <!-- Animated elements -->
+                        <path id="t7-arc" d="" fill="none" stroke="var(--color-red)" stroke-width="2" marker-end="url(#arrow-red)" opacity="0"/>
+                        <text id="t7-arc-lbl" x="0" y="0" class="text-red" opacity="0">+30°</text>
+
+                        <line id="t7-line" x1="0" y1="0" x2="37.58" y2="-13.68" class="vector color-purple" />
+                        <circle id="t7-point" cx="37.58" cy="-13.68" r="5" class="point" />
+                        <text id="t7-lbl" x="45" y="-20" class="point-label">r=1, 20°</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab8" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    The exact same point can be described two ways. Rectangular form says "go right, go up". Polar form says "face this direction, walk this far". Neither is more correct. Rectangular is easier for addition. Polar is easier for multiplication.
+                </div>
+                <div class="controls">
+                    <button class="action-btn active-toggle" id="btn-t8-rect">Rectangular</button>
+                    <button class="action-btn" id="btn-t8-polar">Polar</button>
+                    <button class="action-btn" id="btn-t8-both">Both</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-20 -100 180 120">
+                        <!-- Scale: 30px = 1 unit -->
+                        <line x1="-10" y1="0" x2="150" y2="0" class="axis" marker-end="url(#arrow-axis)"/>
+                        <line x1="0" y1="10" x2="0" y2="-90" class="axis" marker-end="url(#arrow-axis)"/>
+
+                        <!-- Point 3+i (90, -30) -->
+                        <circle cx="90" cy="-30" r="5" class="point" />
+                        <text x="115" y="-35" class="point-label">3 + i</text>
+
+                        <!-- Rectangular -->
+                        <g id="t8-rect" style="opacity: 1; transition: opacity 0.3s;">
+                            <line x1="0" y1="0" x2="90" y2="0" class="vector-dash color-blue" />
+                            <line x1="90" y1="0" x2="90" y2="-30" class="vector-dash color-blue" />
+                            <text x="40" y="15" class="text-blue">Right 3</text>
+                            <text x="100" y="-10" class="text-blue">Up 1</text>
+                        </g>
+
+                        <!-- Polar -->
+                        <g id="t8-polar" style="opacity: 0; transition: opacity 0.3s;">
+                            <line x1="0" y1="0" x2="90" y2="-30" class="vector color-red" />
+                            <!-- Angle arc for ~18.4 deg. From (40,0) to (37.9, -12.6) -->
+                            <path d="M 40 0 A 40 40 0 0 0 37.9 -12.6" fill="none" stroke="var(--color-red)" stroke-width="2" marker-end="url(#arrow-red)"/>
+                            <text x="35" y="-20" class="text-red">Angle ≈ 18.4°</text>
+                            <text x="30" y="-45" class="text-red" transform="rotate(-18.4, 45, -15)">Distance ≈ 3.16</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab9" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    Multiplying by <strong>i</strong> repeatedly steps around the circle in 90-degree jumps. The cycle repeats every four steps. Any power of i can be found by seeing where you land after jumping around the circle.
+                </div>
+                <div class="controls">
+                    <button class="action-btn primary" id="btn-t9">Multiply by i (Next Power)</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-100 -100 200 200">
+                        <line x1="-90" y1="0" x2="90" y2="0" class="axis" />
+                        <line x1="0" y1="90" x2="0" y2="-90" class="axis" />
+                        <circle cx="0" cy="0" r="60" class="guide-line" />
+                        
+                        <!-- Base dots -->
+                        <circle cx="60" cy="0" r="4" fill="var(--axis-color)" />
+                        <circle cx="0" cy="-60" r="4" fill="var(--axis-color)" />
+                        <circle cx="-60" cy="0" r="4" fill="var(--axis-color)" />
+                        <circle cx="0" cy="60" r="4" fill="var(--axis-color)" />
+
+                        <text x="80" y="5" class="axis-label">1</text>
+                        <text x="-80" y="5" class="axis-label">-1</text>
+                        <text x="0" y="-75" class="axis-label" text-anchor="middle">i</text>
+                        <text x="0" y="85" class="axis-label" text-anchor="middle">-i</text>
+
+                        <!-- Highlight element starts at i (0, -60) -->
+                        <circle id="t9-hl" cx="0" cy="-60" r="8" fill="none" stroke="var(--color-purple)" stroke-width="3" />
+                        <rect x="-40" y="-20" width="80" height="40" fill="var(--card-bg)" opacity="0.9" rx="5"/>
+                        <text id="t9-lbl" x="0" y="5" class="point-label color-purple" font-size="18">i¹ = i</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab10" class="tab-content">
+            <div class="tab-left">
+                <div class="explanation">
+                    To find the direction of any point, find the small angle it makes with the nearest flat horizontal axis — that is the reference angle. Then use the quadrant to figure out the actual principal direction.
+                </div>
+                <div class="controls">
+                    <button class="action-btn" id="btn-t10">Cycle Quadrant</button>
+                </div>
+            </div>
+            <div class="tab-right">
+                <div class="svg-container square">
+                    <svg viewBox="-100 -100 200 200">
+                        <line x1="-90" y1="0" x2="90" y2="0" class="axis" />
+                        <line x1="0" y1="90" x2="0" y2="-90" class="axis" />
+                        
+                        <!-- 4 points, radius=70, ref angle = 30deg (pi/6) -->
+                        <!-- Q1 (60.6, -35), Q2 (-60.6, -35), Q3 (-60.6, 35), Q4 (60.6, 35) -->
+                        <circle cx="60.6" cy="-35" r="4" class="point" opacity="0.3" id="t10-p1"/>
+                        <circle cx="-60.6" cy="-35" r="4" class="point" opacity="0.3" id="t10-p2"/>
+                        <circle cx="-60.6" cy="35" r="4" class="point" opacity="0.3" id="t10-p3"/>
+                        <circle cx="60.6" cy="35" r="4" class="point" opacity="0.3" id="t10-p4"/>
+
+                        <!-- Active lines and arcs -->
+                        <line id="t10-line" x1="0" y1="0" x2="60.6" y2="-35" class="vector color-purple" />
+                        
+                        <!-- Ref Arc (starts small at x axis) -->
+                        <path id="t10-ref-arc" d="M 40 0 A 40 40 0 0 0 34.6 -20" fill="none" stroke="var(--color-red)" stroke-width="2" />
+                        <text id="t10-ref-lbl" x="45" y="-10" class="text-red">Ref: 30°</text>
+
+                        <!-- Prin Arc -->
+                        <path id="t10-prin-arc" d="M 25 0 A 25 25 0 0 0 21.6 -12.5" fill="none" stroke="var(--color-blue)" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                        <text id="t10-prin-lbl" x="15" y="-25" class="text-blue">Arg: 30°</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <svg width="0" height="0" style="position:absolute; display:none;">
+            <defs>
+                <marker id="arrow-axis" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--axis-color)" />
+                </marker>
+                <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-blue)" />
+                </marker>
+                <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-red)" />
+                </marker>
+                <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-purple)" />
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <script>
+        // Core Tab Logic
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.target).classList.add('active');
+                
+                // Keep selected tab in view in scrollable area
+                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+
+        // Animation Helper (Easing & RAF)
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function animate({ duration, draw, onComplete }) {
+            let start = performance.now();
+            requestAnimationFrame(function animateFrame(time) {
+                let timeFraction = (time - start) / duration;
+                if (timeFraction > 1) timeFraction = 1;
+                
+                let progress = easeInOutCubic(timeFraction);
+                draw(progress);
+                
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animateFrame);
+                } else if (onComplete) {
+                    onComplete();
+                }
+            });
+        }
+
+        // Math Helpers (SVG Y is inverted relative to standard cartesian math)
+        function getCoords(r, angleDeg) {
+            let rad = angleDeg * Math.PI / 180;
+            return { x: r * Math.cos(rad), y: -r * Math.sin(rad) }; // -y for SVG
+        }
+
+        // Generates an SVG arc path string. 
+        function getArcPath(x, y, r, startAngleDeg, endAngleDeg, sweepFlag = 0) {
+            let start = getCoords(r, startAngleDeg);
+            let end = getCoords(r, endAngleDeg);
+            let largeArc = Math.abs(endAngleDeg - startAngleDeg) > 180 ? 1 : 0;
+            return `M ${x + start.x} ${y + start.y} A ${r} ${r} 0 ${largeArc} ${sweepFlag} ${x + end.x} ${y + end.y}`;
+        }
+
+        // --- Tab 1 Logic: What is i ---
+        const t1Point = document.getElementById('t1-point');
+        const t1Line = document.getElementById('t1-line');
+        const t1Arc = document.getElementById('t1-arc');
+        const t1Label = document.getElementById('t1-label');
+        let t1Angle = 0;
+        let t1Animating = false;
+        const t1Labels = ['1', 'i', '-1', '-i'];
+
+        document.getElementById('btn-t1').addEventListener('click', () => {
+            if (t1Animating) return;
+            t1Animating = true;
+            
+            let startA = t1Angle;
+            let endA = t1Angle + 90;
+            t1Angle = endA;
+            
+            t1Arc.setAttribute('opacity', 1);
+
+            animate({
+                duration: 600,
+                draw: (p) => {
+                    let currentA = startA + (endA - startA) * p;
+                    let c = getCoords(60, currentA);
+                    t1Point.setAttribute('cx', c.x);
+                    t1Point.setAttribute('cy', c.y);
+                    t1Line.setAttribute('x2', c.x);
+                    t1Line.setAttribute('y2', c.y);
+                    
+                    let lblC = getCoords(80, currentA);
+                    t1Label.setAttribute('x', lblC.x);
+                    t1Label.setAttribute('y', lblC.y + 6); // offset for text baseline
+
+                    if (p > 0.05) {
+                        t1Arc.setAttribute('d', getArcPath(0, 0, 45, startA, currentA, 0));
+                    }
+                },
+                onComplete: () => {
+                    t1Label.textContent = t1Labels[(endA / 90) % 4];
+                    t1Animating = false;
+                    setTimeout(() => t1Arc.setAttribute('opacity', 0), 500); // fade out arc
+                }
+            });
+        });
+
+        // --- Tab 3 Logic: Addition ---
+        const t3VecB = document.getElementById('t3-vec-b');
+        const t3LblB = document.getElementById('t3-label-b');
+        const t3VecR = document.getElementById('t3-vec-r');
+        const t3LblR = document.getElementById('t3-label-r');
+        let t3State = 0; // 0=reset, 1=drawn
+        let t3Animating = false;
+
+        document.getElementById('btn-t3').addEventListener('click', (e) => {
+            if (t3Animating) return;
+            t3Animating = true;
+
+            if (t3State === 0) {
+                // Animate drawing B
+                t3VecB.setAttribute('marker-end', 'url(#arrow-red)');
+                animate({
+                    duration: 800,
+                    draw: (p) => {
+                        let curX = 60 + (20 * p);
+                        let curY = -20 - (40 * p);
+                        t3VecB.setAttribute('x2', curX);
+                        t3VecB.setAttribute('y2', curY);
+                    },
+                    onComplete: () => {
+                        t3LblB.setAttribute('opacity', 1);
+                        t3VecR.setAttribute('opacity', 1);
+                        t3VecR.setAttribute('marker-end', 'url(#arrow-green)');
+                        t3LblR.setAttribute('opacity', 1);
+                        e.target.textContent = "Reset";
+                        t3State = 1;
+                        t3Animating = false;
+                    }
+                });
+            } else {
+                // Reset instantly
+                t3VecB.setAttribute('x2', 60);
+                t3VecB.setAttribute('y2', -20);
+                t3VecB.removeAttribute('marker-end');
+                t3LblB.setAttribute('opacity', 0);
+                t3VecR.setAttribute('opacity', 0);
+                t3VecR.removeAttribute('marker-end');
+                t3LblR.setAttribute('opacity', 0);
+                e.target.textContent = "Add B to A";
+                t3State = 0;
+                t3Animating = false;
+            }
+        });
+
+        // --- Tab 4 Logic: Conjugate ---
+        const btnT4Conj = document.getElementById('btn-t4-conj');
+        const btnT4Neg = document.getElementById('btn-t4-neg');
+        const gT4Conj = document.getElementById('t4-conj');
+        const gT4Neg = document.getElementById('t4-neg');
+
+        btnT4Conj.addEventListener('click', () => {
+            btnT4Conj.classList.toggle('active-toggle');
+            gT4Conj.style.opacity = btnT4Conj.classList.contains('active-toggle') ? '1' : '0';
+        });
+        
+        btnT4Neg.addEventListener('click', () => {
+            btnT4Neg.classList.toggle('active-toggle');
+            gT4Neg.style.opacity = btnT4Neg.classList.contains('active-toggle') ? '1' : '0';
+        });
+
+        // --- Tab 5 Logic: Modulus ---
+        const t5LegRe = document.getElementById('t5-leg-re');
+        const t5LegIm = document.getElementById('t5-leg-im');
+        const t5Hyp = document.getElementById('t5-hyp');
+        const t5TxtRe = document.getElementById('t5-txt-re');
+        const t5TxtIm = document.getElementById('t5-txt-im');
+        const t5TxtHyp = document.getElementById('t5-txt-hyp');
+        const t5Bg = document.getElementById('t5-bg');
+        let t5State = 0;
+        let t5Animating = false;
+
+        document.getElementById('btn-t5').addEventListener('click', (e) => {
+            if (t5Animating) return;
+            
+            if (t5State === 0) {
+                t5Animating = true;
+                // Animate Re Leg
+                animate({
+                    duration: 400,
+                    draw: (p) => { t5LegRe.setAttribute('x2', 60 * p); },
+                    onComplete: () => {
+                        t5TxtRe.setAttribute('opacity', 1);
+                        // Animate Im Leg
+                        animate({
+                            duration: 400,
+                            draw: (p) => {
+                                t5LegIm.setAttribute('x1', 60);
+                                t5LegIm.setAttribute('x2', 60);
+                                t5LegIm.setAttribute('y1', 0);
+                                t5LegIm.setAttribute('y2', -80 * p);
+                            },
+                            onComplete: () => {
+                                t5TxtIm.setAttribute('opacity', 1);
+                                // Animate Hypotenuse
+                                animate({
+                                    duration: 500,
+                                    draw: (p) => {
+                                        t5Hyp.setAttribute('x2', 60 * p);
+                                        t5Hyp.setAttribute('y2', -80 * p);
+                                    },
+                                    onComplete: () => {
+                                        t5TxtHyp.setAttribute('opacity', 1);
+                                        t5Bg.setAttribute('opacity', 0.8);
+                                        e.target.textContent = "Reset";
+                                        t5State = 1;
+                                        t5Animating = false;
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            } else {
+                t5LegRe.setAttribute('x2', 0);
+                t5LegIm.setAttribute('y2', 0);
+                t5Hyp.setAttribute('x2', 0); t5Hyp.setAttribute('y2', 0);
+                [t5TxtRe, t5TxtIm, t5TxtHyp, t5Bg].forEach(el => el.setAttribute('opacity', 0));
+                e.target.textContent = "Draw Triangle";
+                t5State = 0;
+            }
+        });
+
+        // --- Tab 6 Logic: Argument ---
+        const btnT6Prin = document.getElementById('btn-t6-prin');
+        const btnT6Neg = document.getElementById('btn-t6-neg');
+        const gT6Prin = document.getElementById('t6-prin');
+        const gT6Neg = document.getElementById('t6-neg');
+
+        btnT6Prin.addEventListener('click', () => {
+            btnT6Prin.classList.add('active-toggle');
+            btnT6Neg.classList.remove('active-toggle');
+            gT6Prin.style.opacity = '1';
+            gT6Neg.style.opacity = '0';
+        });
+
+        btnT6Neg.addEventListener('click', () => {
+            btnT6Neg.classList.add('active-toggle');
+            btnT6Prin.classList.remove('active-toggle');
+            gT6Neg.style.opacity = '1';
+            gT6Prin.style.opacity = '0';
+        });
+
+        // --- Tab 7 Logic: Multiplication ---
+        const t7Line = document.getElementById('t7-line');
+        const t7Point = document.getElementById('t7-point');
+        const t7Arc = document.getElementById('t7-arc');
+        const t7ArcLbl = document.getElementById('t7-arc-lbl');
+        const t7Lbl = document.getElementById('t7-lbl');
+        let t7State = 0;
+        let t7Animating = false;
+
+        document.getElementById('btn-t7').addEventListener('click', (e) => {
+            if (t7Animating) return;
+            
+            if (t7State === 0) {
+                t7Animating = true;
+                let startR = 40, endR = 80;
+                let startA = 20, endA = 50;
+                
+                t7Arc.setAttribute('opacity', 1);
+                t7ArcLbl.setAttribute('opacity', 1);
+
+                animate({
+                    duration: 1200,
+                    draw: (p) => {
+                        let curR = startR + (endR - startR) * p;
+                        let curA = startA + (endA - startA) * p;
+                        let c = getCoords(curR, curA);
+                        
+                        t7Line.setAttribute('x2', c.x);
+                        t7Line.setAttribute('y2', c.y);
+                        t7Point.setAttribute('cx', c.x);
+                        t7Point.setAttribute('cy', c.y);
+                        
+                        let lC = getCoords(curR + 15, curA);
+                        t7Lbl.setAttribute('x', lC.x);
+                        t7Lbl.setAttribute('y', lC.y);
+
+                        if(curA > startA + 1) {
+                            t7Arc.setAttribute('d', getArcPath(0, 0, 25, startA, curA, 0));
+                            let arcMid = getCoords(35, startA + (curA - startA)/2);
+                            t7ArcLbl.setAttribute('x', arcMid.x);
+                            t7ArcLbl.setAttribute('y', arcMid.y);
+                        }
+                    },
+                    onComplete: () => {
+                        t7Lbl.textContent = "r=2, 50°";
+                        e.target.textContent = "Reset";
+                        t7State = 1;
+                        t7Animating = false;
+                    }
+                });
+            } else {
+                let c = getCoords(40, 20);
+                t7Line.setAttribute('x2', c.x); t7Line.setAttribute('y2', c.y);
+                t7Point.setAttribute('cx', c.x); t7Point.setAttribute('cy', c.y);
+                let lC = getCoords(55, 20);
+                t7Lbl.setAttribute('x', lC.x); t7Lbl.setAttribute('y', lC.y);
+                t7Lbl.textContent = "r=1, 20°";
+                t7Arc.setAttribute('opacity', 0);
+                t7ArcLbl.setAttribute('opacity', 0);
+                e.target.textContent = "Multiply (×2 distance, +30° turn)";
+                t7State = 0;
+            }
+        });
+
+        // --- Tab 8 Logic: Coordinate Systems ---
+        const btnT8Rect = document.getElementById('btn-t8-rect');
+        const btnT8Polar = document.getElementById('btn-t8-polar');
+        const btnT8Both = document.getElementById('btn-t8-both');
+        const gT8Rect = document.getElementById('t8-rect');
+        const gT8Polar = document.getElementById('t8-polar');
+
+        function setT8Mode(mode) {
+            [btnT8Rect, btnT8Polar, btnT8Both].forEach(b => b.classList.remove('active-toggle'));
+            if (mode === 'rect') {
+                btnT8Rect.classList.add('active-toggle');
+                gT8Rect.style.opacity = '1'; gT8Polar.style.opacity = '0';
+            } else if (mode === 'polar') {
+                btnT8Polar.classList.add('active-toggle');
+                gT8Rect.style.opacity = '0'; gT8Polar.style.opacity = '1';
+            } else {
+                btnT8Both.classList.add('active-toggle');
+                gT8Rect.style.opacity = '1'; gT8Polar.style.opacity = '1';
+            }
+        }
+        btnT8Rect.addEventListener('click', () => setT8Mode('rect'));
+        btnT8Polar.addEventListener('click', () => setT8Mode('polar'));
+        btnT8Both.addEventListener('click', () => setT8Mode('both'));
+
+        // --- Tab 9 Logic: Powers of i ---
+        const t9Hl = document.getElementById('t9-hl');
+        const t9Lbl = document.getElementById('t9-lbl');
+        let t9Power = 1;
+        const t9Vals = [
+            { angle: 0, val: '1' },
+            { angle: 90, val: 'i' },
+            { angle: 180, val: '-1' },
+            { angle: 270, val: '-i' }
+        ];
+
+        document.getElementById('btn-t9').addEventListener('click', () => {
+            t9Power++;
+            let idx = t9Power % 4; // 1->i(1), 2->-1(2), 3->-i(3), 4->1(0)
+            let cfg = t9Vals[idx];
+            let c = getCoords(60, cfg.angle);
+            
+            // Simple CSS transition on cx/cy by using style, but attributes don't transition well cross-browser.
+            // Best to animate it directly for smoothness.
+            let curX = parseFloat(t9Hl.getAttribute('cx'));
+            let curY = parseFloat(t9Hl.getAttribute('cy'));
+            
+            animate({
+                duration: 300,
+                draw: (p) => {
+                    t9Hl.setAttribute('cx', curX + (c.x - curX) * p);
+                    t9Hl.setAttribute('cy', curY + (c.y - curY) * p);
+                },
+                onComplete: () => {
+                    t9Lbl.textContent = `i${String(t9Power).split('').map(c => '⁰¹²³⁴⁵⁶⁷⁸⁹'[c]).join('')} = ${cfg.val}`;
+                }
+            });
+        });
+
+        // --- Tab 10 Logic: Reference Angle ---
+        const t10Line = document.getElementById('t10-line');
+        const t10RefArc = document.getElementById('t10-ref-arc');
+        const t10PrinArc = document.getElementById('t10-prin-arc');
+        const t10RefLbl = document.getElementById('t10-ref-lbl');
+        const t10PrinLbl = document.getElementById('t10-prin-lbl');
+        
+        let t10Q = 0; // 0=Q1, 1=Q2, 2=Q3, 3=Q4
+        const t10Configs = [
+            { id: 't10-p1', prin: 30, ref: 30, px: 60.6, py: -35, cx: 1, cy: 1 }, // Q1
+            { id: 't10-p2', prin: 150, ref: 30, px: -60.6, py: -35, cx: -1, cy: 1 }, // Q2
+            { id: 't10-p3', prin: 210, ref: 30, px: -60.6, py: 35, cx: -1, cy: -1 }, // Q3
+            { id: 't10-p4', prin: 330, ref: 30, px: 60.6, py: 35, cx: 1, cy: -1 }  // Q4
+        ];
+
+        document.getElementById('btn-t10').addEventListener('click', () => {
+            // Un-highlight previous
+            document.getElementById(t10Configs[t10Q].id).setAttribute('opacity', '0.3');
+            document.getElementById(t10Configs[t10Q].id).classList.remove('color-purple');
+            
+            t10Q = (t10Q + 1) % 4;
+            let cfg = t10Configs[t10Q];
+            
+            // Highlight current
+            let pointEl = document.getElementById(cfg.id);
+            pointEl.setAttribute('opacity', '1');
+            pointEl.classList.add('color-purple');
+
+            // Move line
+            t10Line.setAttribute('x2', cfg.px);
+            t10Line.setAttribute('y2', cfg.py);
+
+            // Update Arcs
+            // Ref arc is always from nearest X axis
+            let refStartX = cfg.cx > 0 ? 40 : -40;
+            let sweep = (cfg.cx > 0 && cfg.cy > 0) || (cfg.cx < 0 && cfg.cy < 0) ? 0 : 1; 
+            // Manual pathing for reference arc to keep it simple and robust
+            let rEndX = 40 * Math.cos(cfg.prin * Math.PI/180);
+            let rEndY = -40 * Math.sin(cfg.prin * Math.PI/180);
+            
+            // Because SVG arcs are tricky with signs, let's just generate paths
+            t10RefArc.setAttribute('d', `M ${refStartX} 0 A 40 40 0 0 ${sweep} ${rEndX} ${rEndY}`);
+            
+            // Prin arc always from positive X axis
+            let pEndX = 25 * Math.cos(cfg.prin * Math.PI/180);
+            let pEndY = -25 * Math.sin(cfg.prin * Math.PI/180);
+            let largeArc = cfg.prin > 180 ? 1 : 0;
+            t10PrinArc.setAttribute('d', `M 25 0 A 25 25 0 ${largeArc} 0 ${pEndX} ${pEndY}`);
+
+            // Labels positioning
+            let refMidAng = cfg.cx > 0 ? (cfg.cy > 0 ? 15 : 345) : (cfg.cy > 0 ? 165 : 195);
+            let rmC = getCoords(55, refMidAng);
+            t10RefLbl.setAttribute('x', rmC.x - 20);
+            t10RefLbl.setAttribute('y', rmC.y + 5);
+
+            let pmC = getCoords(15, cfg.prin/2);
+            t10PrinLbl.setAttribute('x', pmC.x - 20);
+            t10PrinLbl.setAttribute('y', pmC.y + 5);
+            t10PrinLbl.textContent = `Arg: ${cfg.prin}°`;
+        });
+        
+        // Initialise Q1 highlight
+        let initCfg = t10Configs[0];
+        let initPoint = document.getElementById(initCfg.id);
+        initPoint.setAttribute('opacity', '1');
+        initPoint.classList.add('color-purple');
+
+    </script>
+</body>
+</html>
